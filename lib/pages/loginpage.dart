@@ -9,13 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String name = "null";
-
-  get navigator => null;
-
-  get child => null;
-
-  get decoration => null;
+  String name = "";
+  bool changeButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 60,
             ),
             Text(
-              "Login Page $name",
+              "বৈধ লাইসেন্স আছে ? $name",
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -50,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                       decoration: const InputDecoration(
                         hintText: "Enter Your User Id",
-                        labelText: "User Id",
+                        labelText: "আইডি বল",
                       ),
                       onChanged: (value) {
                         name = value;
@@ -59,34 +54,44 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     decoration: const InputDecoration(
                       hintText: "Enter Your PassWord",
-                      labelText: "PassWord",
+                      labelText: "পাসওয়ার্ড দে",
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text("Forgot Password"),
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
             InkWell(
-              onTap: () {
+              onTap: () async {
+                setState(() {
+                  changeButton = true;
+                });
+                await Future.delayed(Duration(seconds: 1));
                 Navigator.pushNamed(context, MyRouts.homeRoute);
               },
-              child: Container(
-                width: 100,
+              child: AnimatedContainer(
+                duration: Duration(seconds: 1),
+                width: changeButton ? 50 : 120,
                 height: 50,
                 alignment: Alignment.center,
-                child: Text("Login"),
+                child: changeButton ? Icon(Icons.done) : Text("এখানে চাপ দে"),
                 decoration: BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.deepOrange,
+                  shape: changeButton ? BoxShape.circle : BoxShape.rectangle,
+                  // borderRadius: BorderRadius.circular(changeButton ? 30),
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 35,
+            ),
+            Text("পাসওয়ার্ড ভূলে গিয়েছি"),
+            SizedBox(
+              height: 35,
+            ),
+
             // ElevatedButton(
             //   onPressed: () {
             //     navigator.pushname(context, MyRouts.homeRoute);
@@ -102,7 +107,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-// widget -class  - pascalcase -HelloWorld
-// cammelCase - helloWorld  - proprt , vsriab , fumc 
