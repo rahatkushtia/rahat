@@ -11,99 +11,127 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+  final _formKey = GlobalKey<FormState>();
+
+  get validator => null;
+
+  moveToHome(BuildContext context) async {
+    if(_formKey.currentState!.validate()){
+    setState(() {
+      changeButton = true;
+    });
+    await Future.delayed(Duration(seconds: 1));
+    await Navigator.pushNamed(context, MyRouts.homeRoute);
+    setState(() {
+      changeButton = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-                width: 200,
-                height: 200,
-                child: Image.asset("assets/images/01image.png",
-                    fit: BoxFit.contain)),
-            const SizedBox(
-              height: 60,
-            ),
-            Text(
-              "বৈধ লাইসেন্স আছে ? $name",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: "Enter Your User Id",
-                        labelText: "আইডি বল",
-                      ),
-                      onChanged: (value) {
-                        name = value;
-                        setState(() {});
-                      }),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: "Enter Your PassWord",
-                      labelText: "পাসওয়ার্ড দে",
-                    ),
-                  ),
-                ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(child: Text("App Development")),
+      ),
+      drawer: const Drawer(),
+      backgroundColor: Colors.orange,
+      body: Material(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: Image.asset("assets/images/rahat.png",
+                      fit: BoxFit.contain)),
+              const SizedBox(
+                height: 60,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            InkWell(
-              onTap: () async {
-                setState(() {
-                  changeButton = true;
-                });
-                await Future.delayed(Duration(seconds: 1));
-                Navigator.pushNamed(context, MyRouts.homeRoute);
-              },
-              child: AnimatedContainer(
-                duration: Duration(seconds: 1),
-                width: changeButton ? 50 : 120,
-                height: 50,
-                alignment: Alignment.center,
-                child: changeButton ? Icon(Icons.done) : Text("এখানে চাপ দে"),
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange,
-                  shape: changeButton ? BoxShape.circle : BoxShape.rectangle,
-                  // borderRadius: BorderRadius.circular(changeButton ? 30),
+              Text(
+                "WelCome $name",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                        decoration: const InputDecoration(
+                          hintText: "Enter Your User Id",
+                          labelText: "User Id",
+                        ),
+                        validator: (value) {
+                      if (value.is Empty) {
+                        return "User name is Empty";
+                      }
+                      return null;
+                    }
+                        onChanged: (value) {
+                          name = value;
+                          setState(() {});
+                        }),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: "Enter Your PassWord",
+                        labelText: "Your Password",
+                      ),
+                    ), validator: (value) {
+                      if (value.is Empty) {
+                        return "User name is Empty";
+                      }
+                      return null;
+                    }
+                  ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Text("পাসওয়ার্ড ভূলে গিয়েছি"),
-            SizedBox(
-              height: 35,
-            ),
+              SizedBox(
+                height: 20,
+              ),
+              Material(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(changeButton ? 30 : 8),
+                child: InkWell(
+                  splashColor: Colors.red,
+                  onTap: () => moveToHome(context),
+                  child: AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    width: changeButton ? 50 : 120,
+                    height: 50,
+                    alignment: Alignment.center,
+                    child: changeButton ? Icon(Icons.done) : Text("Login"),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Text("Forget PassWord"),
+              SizedBox(
+                height: 35,
+              ),
 
-            // ElevatedButton(
-            //   onPressed: () {
-            //     navigator.pushname(context, MyRouts.homeRoute);
-            //   },
-            //   child: const Text("Login"),
-            //   style: TextButton.styleFrom(
-            //       minimumSize: const Size(100, 40),
-            //       backgroundColor: Colors.blue),
-            // )
-          ],
+              // ElevatedButton(
+              //   onPressed: () {
+              //     navigator.pushname(context, MyRouts.homeRoute);
+              //   },
+              //   child: const Text("Login"),
+              //   style: TextButton.styleFrom(
+              //       minimumSize: const Size(100, 40),
+              //       backgroundColor: Colors.blue),
+              // )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+class FromState {}
