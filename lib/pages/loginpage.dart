@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rahat_app/pages/routes.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -11,50 +9,49 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+
   final _formKey = GlobalKey<FormState>();
 
-  get validator => null;
-
   moveToHome(BuildContext context) async {
-    if(_formKey.currentState!.validate()){
-    setState(() {
-      changeButton = true;
-    });
-    await Future.delayed(Duration(seconds: 1));
-    await Navigator.pushNamed(context, MyRouts.homeRoute);
-    setState(() {
-      changeButton = false;
-    });
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        changeButton = true;
+      });
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text("App Development")),
-      ),
-      drawer: const Drawer(),
-      backgroundColor: Colors.orange,
-      body: Material(
-        child: SingleChildScrollView(
+    return Material(
+      color: Colors.white,
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
           child: Column(
             children: [
               SizedBox(
-                  width: 200,
-                  height: 200,
-                  child: Image.asset("assets/images/rahat.png",
-                      fit: BoxFit.contain)),
+                  width: 400,
+                  height: 300,
+                  child: Image.asset(
+                    "assets/images/login_img.png",
+                    fit: BoxFit.fitHeight,
+                  )),
               const SizedBox(
-                height: 60,
+                height: 20,
               ),
               Text(
-                "WelCome $name",
+                "Welcome $name",
                 style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.blue),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -64,40 +61,44 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     TextFormField(
                         decoration: const InputDecoration(
-                          hintText: "Enter Your User Id",
-                          labelText: "User Id",
+                          hintText: "Enter Your User ID",
+                          labelText: "User ID",
                         ),
                         validator: (value) {
-                      if (value.is Empty) {
-                        return "User name is Empty";
-                      }
-                      return null;
-                    }
+                          if (value!.isEmpty) {
+                            return "User name is Empty";
+                          }
+                          return null;
+                        },
                         onChanged: (value) {
                           name = value;
                           setState(() {});
                         }),
                     TextFormField(
+                      obscureText: true,
                       decoration: const InputDecoration(
-                        hintText: "Enter Your PassWord",
-                        labelText: "Your Password",
+                        hintText: "Enter Your Password",
+                        labelText: "Password",
                       ),
-                    ), validator: (value) {
-                      if (value.is Empty) {
-                        return "User name is Empty";
-                      }
-                      return null;
-                    }
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password is Empty";
+                        }
+                        return null;
+                      },
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
+
               Material(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(changeButton ? 30 : 8),
+                color: Colors.deepPurple,
+                borderRadius: BorderRadius.circular(changeButton ? 50 : 8),
                 child: InkWell(
+                  borderRadius: BorderRadius.circular(changeButton ? 50 : 8),
                   splashColor: Colors.red,
                   onTap: () => moveToHome(context),
                   child: AnimatedContainer(
@@ -105,27 +106,31 @@ class _LoginPageState extends State<LoginPage> {
                     width: changeButton ? 50 : 120,
                     height: 50,
                     alignment: Alignment.center,
-                    child: changeButton ? Icon(Icons.done) : Text("Login"),
+                    child: changeButton
+                        ? Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 35,
-              ),
-              Text("Forget PassWord"),
-              SizedBox(
-                height: 35,
-              ),
 
               // ElevatedButton(
-              //   onPressed: () {
-              //     navigator.pushname(context, MyRouts.homeRoute);
-              //   },
-              //   child: const Text("Login"),
-              //   style: TextButton.styleFrom(
-              //       minimumSize: const Size(100, 40),
-              //       backgroundColor: Colors.blue),
-              // )
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, MyRoutes.homeRoute);
+              //     },
+              //     child: const Text("Login"),
+              //     style: TextButton.styleFrom(
+              //         minimumSize: const Size(100, 40),
+              //         backgroundColor: Colors.blue)),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text("Forgot Password?"),
             ],
           ),
         ),
@@ -133,5 +138,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-class FromState {}
