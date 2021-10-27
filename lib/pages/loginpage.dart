@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: 400,
                   height: 300,
                   child: Image.asset(
-                    "assets/images/login_img.png",
+                    "assets/images/rahat.png",
                     fit: BoxFit.fitHeight,
                   )),
               const SizedBox(
