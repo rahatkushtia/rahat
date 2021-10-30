@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
         child: Container(
           width: 300,
           height: 200,
-          color: Colors.black,
+          color: Colors.white60,
           child: const Center(
               child: Text(
             "Sabit Degine World",
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                 fontSize: 23,
                 color: Colors.white38,
                 fontWeight: FontWeight.bold,
-                backgroundColor: Colors.grey),
+                backgroundColor: Colors.blue),
           )),
         ),
       ),
