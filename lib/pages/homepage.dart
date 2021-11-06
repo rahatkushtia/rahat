@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rahat_app/Widget/drawer.dart';
+import 'package:rahat_app/Widget/item_Widget.dart';
+import 'package:rahat_app/model/product.dart';
+import 'package:rahat_app/widget/drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,27 +9,27 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text("Graphic Design")),
-      ),
-      drawer: MyDrawer(),
-      backgroundColor: Colors.green,
-      body: Center(
-        child: Container(
-          width: 300,
-          height: 200,
-          color: Colors.white60,
-          child: const Center(
-              child: Text(
-            "Sabit Degine World",
-            style: TextStyle(
-                fontSize: 23,
-                color: Colors.white38,
-                fontWeight: FontWeight.bold,
-                backgroundColor: Colors.blue),
-          )),
+        appBar: AppBar(
+          title: Center(
+            child: Column(
+              children: [
+                Text("Graphic Design"),
+                Text(
+                  "Dream Your Earn",
+                  style: TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+        drawer: MyDrawer(),
+        backgroundColor: Colors.grey,
+        body: ListView.builder(
+            itemCount: CatalogModel.item.length,
+            itemBuilder: (context, index) {
+              return ItemWidget(items: CatalogModel.item[index]);
+            }));
   }
 }
+
+class Itemwwidget {}

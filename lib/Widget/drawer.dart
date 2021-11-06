@@ -3,37 +3,43 @@ import 'package:flutter/material.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
-  get children => null;
-
   @override
   Widget build(BuildContext context) {
-    final imageurl =
-        "https://scontent.fdac46-1.fna.fbcdn.net/v/t1.6435-9/60180319_652989888495150_1511410222801879040_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=qdKpG51SZnUAX9Wmfo_&_nc_ht=scontent.fdac46-1.fna&oh=7fc993e4516d3284ad37a069b4eb37cf&oe=619DA6FF";
+    var blendMode;
+    var color;
     return Drawer(
-      child: Column(
-        children: [
-          Container(
-              width: 320,
-              height: 200,
-              child: DrawerHeader(
-                margin: EdgeInsets.all(0),
-                padding: EdgeInsets.all(0),
-                child: Column(children: [
-                  Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(imageurl),
-                      )),
-                  SizedBox(height: 10),
-                  Text(
-                    "Name: Imranul Islam Rahat",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text("imranulislamrahat@gmail.com"),
-                ]),
-              )),
-        ],
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                colorFilter: ColorFilter.mode(
+                    color.black.withOpacity(0.2), blendMode.dstaTop),
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                    "https://images.unsplash.com/photo-1531533748270-34089046fb49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"))),
+        width: 150,
+        height: 320,
+        child: DrawerHeader(
+          margin: EdgeInsets.all(0),
+          padding: EdgeInsets.only(top: 10),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                width: 100,
+                height: 80,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      "https://images.unsplash.com/photo-1611928506023-25ed62d1d04d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80"),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Text("Imranul Islam Rahat"),
+              ),
+              Text("imranulislamrahat@gmail.com"),
+            ],
+          ),
+        ),
       ),
     );
   }
