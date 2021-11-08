@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allproductlist = List.generate(50, (index) => CatalogModel.item[0]);
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -25,9 +26,9 @@ class HomePage extends StatelessWidget {
         drawer: MyDrawer(),
         backgroundColor: Colors.grey,
         body: ListView.builder(
-            itemCount: CatalogModel.item.length,
+            itemCount: allproductlist.length,
             itemBuilder: (context, index) {
-              return ItemWidget(items: CatalogModel.item[index]);
+              return ItemWidget(item: allproductlist[index]);
             }));
   }
 }

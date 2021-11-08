@@ -12,7 +12,7 @@ class Item {
 
 class CatalogModel {
   static final item = [
-    Item("R001", "Computer", "Brand New Product", "32059", "black",
+    Item("R001", "Computer", "Brand New Product", "32,059.00", "black",
         "https://sc04.alicdn.com/kf/H2c986c73345141a9b17f84da2b348911G.jpg")
   ];
 }
