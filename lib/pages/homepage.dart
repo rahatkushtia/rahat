@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 import 'package:rahat_app/Widget/item_Widget.dart';
 import 'package:rahat_app/model/product.dart';
 import 'package:rahat_app/widget/drawer.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    var productjson = await rootBundle.loadString("assets/files/product.json");
+    final decodedData = jsonDecode(productjson);
+    var productData = decodedData["products"];
+    print(productData);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,5 +52,3 @@ class HomePage extends StatelessWidget {
             }));
   }
 }
-
-class Itemwwidget {}
