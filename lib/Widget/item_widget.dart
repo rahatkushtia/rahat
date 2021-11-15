@@ -14,9 +14,9 @@ class ItemWidget extends StatelessWidget {
       child: ListTile(
         leading: Image.network(item.image),
         title: Text(item.name),
-        subtitle: Text(item.description),
+        subtitle: Text(item.desc),
         trailing: Text(
-          "\৳${item.price}",
+          "৳${item.price}",
           textScaleFactor: 1.4,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
