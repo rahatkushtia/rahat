@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -5,14 +6,12 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var blendMode;
-    var color;
     return Drawer(
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
                 colorFilter: ColorFilter.mode(
-                    color.black.withOpacity(0.2), blendMode.dstaTop),
+                    Colors.black.withOpacity(0.2), BlendMode.dstATop),
                 fit: BoxFit.cover,
                 image: NetworkImage(
                     "https://images.unsplash.com/photo-1531533748270-34089046fb49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"))),
@@ -37,6 +36,22 @@ class MyDrawer extends StatelessWidget {
                 child: Text("Imranul Islam Rahat"),
               ),
               Text("imranulislamrahat@gmail.com"),
+              ListTile(
+                leading: Icon(CupertinoIcons.home),
+                title: Text("Home", textScaleFactor: 1.2),
+              ),
+              ListTile(
+                leading: Icon(CupertinoIcons.profile_circled),
+                title: Text("Profile", textScaleFactor: 1.2),
+              ),
+              ListTile(
+                leading: Icon(CupertinoIcons.settings),
+                title: Text("Settings", textScaleFactor: 1.2),
+              ),
+              ListTile(
+                leading: Icon(Icons.logout_rounded),
+                title: Text("Logout", textScaleFactor: 1.2),
+              ),
             ],
           ),
         ),

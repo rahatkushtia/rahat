@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     var productjson = await rootBundle.loadString("assets/files/product.json");
     final decodedData = jsonDecode(productjson);
     var productData = decodedData["products"];
@@ -47,10 +48,14 @@ class _HomePageState extends State<HomePage> {
         ),
         drawer: MyDrawer(),
         backgroundColor: Colors.grey,
-        body: ListView.builder(
-            itemCount: CatalogModel.items.length,
-            itemBuilder: (context, index) {
-              return ItemWidget(item: CatalogModel.items[index]);
-            }));
+        body: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+            ? ListView.builder(
+                itemCount: CatalogModel.items.length,
+                itemBuilder: (context, index) {
+                  return ItemWidget(item: CatalogModel.items[index]);
+                })
+            : Center(
+                child: CircularProgressIndicator(),
+              ));
   }
 }
