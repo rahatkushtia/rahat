@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rahat_app/pages/routes.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -41,10 +42,16 @@ class MyDrawer extends StatelessWidget {
                 title: Text("Home", textScaleFactor: 1.2),
               ),
               ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, '/profile');
+                },
                 leading: Icon(CupertinoIcons.profile_circled),
                 title: Text("Profile", textScaleFactor: 1.2),
               ),
               ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, '/setting');
+                },
                 leading: Icon(CupertinoIcons.settings),
                 title: Text("Settings", textScaleFactor: 1.2),
               ),
