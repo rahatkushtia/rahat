@@ -3,4 +3,6 @@ class MyRoutes {
   static String homeRoute = "/home";
   static String profileRoute = "/profile";
   static String settingRoute = "/setting";
+  static String singupRoute = "/singup";
+
 }
